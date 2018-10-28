@@ -48,9 +48,9 @@ public class Sort
 //		consumers();
 //		predicates();
 //		functions();
-//		suppliers();
+		suppliers();
 //		builder();
-		streaming();
+//		streaming();
 		
 	}
 

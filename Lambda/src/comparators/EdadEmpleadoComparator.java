@@ -15,17 +15,12 @@ public class EdadEmpleadoComparator implements Comparator<Empleado>
 	@Override
 	public int compare(Empleado e1, Empleado e2)
 	{
-		if(e1.getEdad() < e2.getEdad()) {
+		if(e1.getEdad() < e2.getEdad())
 			return -1;
-		}
-		else if(e1.getEdad() > e2.getEdad()) {
+		else if(e1.getEdad() > e2.getEdad())
 			return 1;
-		}
-		
-		else {
+		else
 			return 0;
-		}
-		
 	}
 
 }
