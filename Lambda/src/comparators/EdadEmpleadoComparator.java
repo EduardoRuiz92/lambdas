@@ -22,5 +22,4 @@ public class EdadEmpleadoComparator implements Comparator<Empleado>
 		else
 			return 0;
 	}
-
 }
