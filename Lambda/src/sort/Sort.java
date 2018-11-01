@@ -5,8 +5,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-import java.util.function.Supplier;
-import java.util.stream.Collectors;
 
 import beans.Empleado;
 import builder.PizzaBuilder;
@@ -34,7 +32,7 @@ public class Sort
 	 */
 	public static void main(String[] args)
 	{
-//		test1();
+		test1();
 //		test2();
 //		test3();
 //		test4();
@@ -48,10 +46,13 @@ public class Sort
 //		consumers();
 //		predicates();
 //		functions();
-		suppliers();
+//		suppliers();
 //		builder();
+//		contarEmpleados();
+//		contarEmpleadosStreaming();
+//		imprimirEmpleadosFiltrados();
+//		imprimirEmpleadosFiltradosStreaming();
 //		streaming();
-		
 	}
 
 	/**
@@ -218,6 +219,9 @@ public class Sort
 		System.out.println("Hay " + cantidad + " empleados que ganan más de $1000");
 	}
 	
+	/**
+	 * Utilizamos dos tipos de lambdas, Consumidores y BiConsumidores.
+	 */
 	private static void consumers()
 	{
 		List<Empleado> empleados = GenerateEmployee.crearEmpleados();
@@ -225,6 +229,9 @@ public class Sort
 		Consumers.biConsumidor();
 	}
 	
+	/**
+	 * Utilizamos dos tipos de lambdas, Predicados y BiPredicados.
+	 */
 	private static void predicates()
 	{
 		List<Empleado> empleados = GenerateEmployee.crearEmpleados();
@@ -233,6 +240,9 @@ public class Sort
 		Predicates.biPredicado(empleados);
 	}
 	
+	/**
+	 * Utilizamos dos tipos de lambdas, Funciones y BiFunciones.
+	 */
 	private static void functions()
 	{
 		List<Empleado> empleados = GenerateEmployee.crearEmpleados();
@@ -242,51 +252,76 @@ public class Sort
 				.withTopping(Topping.MOZZARELLA_CHEESE).withTopping(Topping.ONIONS).buildPizza());
 	}
 	
+	/**
+	 * Utilizamos el tipo de lambdas, Proveedores.
+	 */
 	private static void suppliers()
 	{
 		Suppliers.proveedor().stream().forEach((empleado) -> System.out.println(empleado));
 	}
 	
-	private static void streaming()
+	/**
+	 * Método que indica cuántos empleados hay con un salario igual o mayor a $5,000.00.
+	 */
+	private static void contarEmpleados()
 	{
 		long cantidad = 0;
 		List<Empleado> empleados = Suppliers.proveedor();
 		
-//		empleados.stream().count();
+		for(Empleado empleado : empleados)
+			if(empleado.getSalario().compareTo(new BigDecimal(5_000)) >= 0)
+				cantidad++;
 		
-		
-//		for(Empleado empleado : empleados)
-//		{
-//			if(empleado.getSalario().compareTo(new BigDecimal(10000)) >= 0)
-//			{
-//				cantidad++;
-//			}
-//		}
-		
-//		cantidad = empleados.stream().filter( (empleado) -> empleado.getSalario().compareTo(new BigDecimal(5000)) >= 0 ).count();
-		
-		List<Empleado> filtrados = new ArrayList<>();
-		
-//		for(Empleado empleado : empleados)
-//		{
-//			if(empleado.getSalario().compareTo(new BigDecimal(5000)) >= 0)
-//			{
-//				filtrados.add(empleado);
-//			}
-//		}
-//		
-//		for(Empleado empleado : filtrados)
-//		{
-//			System.out.println(empleado);
-//		}
-		
-		empleados.stream().filter((empleado) -> empleado.getSalario().compareTo(new BigDecimal(5000)) >= 0)
-				.forEach((empleado) -> System.out.println(empleado));
-		
-//		System.out.print("La lista tiene " + cantidad + " empleados que ganan más de $5,000.00");
-		
+		System.out.print("La lista tiene " + cantidad + " empleados que ganan más de $5,000.00");
 	}
 	
+	/**
+	 * Método que indica cuántos empleados hay con un salario igual o mayor a $5,000.00,
+	 * utilizando lambdas y el API stream.
+	 */
+	private static void contarEmpleadosStreaming()
+	{
+		long cantidad = 0;
+		List<Empleado> empleados = Suppliers.proveedor();
+		
+		cantidad = empleados.stream().filter((empleado) -> 
+					empleado.getSalario().compareTo(new BigDecimal(5_000)) >= 0).count();
+		
+		System.out.print("La lista tiene " + cantidad + " empleados que ganan más de $5,000.00");
+	}
+	
+	/**
+	 * Método que imprime a los empleados con un salario igual o mayor a $5,000.00.
+	 */
+	private static void imprimirEmpleadosFiltrados()
+	{
+		List<Empleado> empleados = Suppliers.proveedor();
+		List<Empleado> filtrados = new ArrayList<>();
+		
+		for(Empleado empleado : empleados)
+			if(empleado.getSalario().compareTo(new BigDecimal(5_000)) >= 0)
+				filtrados.add(empleado);
+		
+		for(Empleado empleado : filtrados)
+			System.out.println(empleado);
+	}
+	
+	/**
+	 * Método que imprime a los empleados con un salario igual o mayor a $5,000.00,
+	 * utilizando lambdas y el API stream.
+	 */
+	private static void imprimirEmpleadosFiltradosStreaming()
+	{	
+		Suppliers.proveedor().stream().filter((empleado) -> 
+			empleado.getSalario().compareTo(new BigDecimal(5000)) >= 0)
+				.forEach((empleado) -> System.out.println(empleado));
+	}
+	
+	/**
+	 * Método que imprime una lista de obetos, a través de su método "toString".
+	 * 
+	 * @param objetos Lista de los objetos a imprimir.
+	 */
 	private static void imprimir(List objetos)
 	{
 		for(Object obj : objetos)

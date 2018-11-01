@@ -39,21 +39,37 @@ public class GenerateEmployee
 		return lista;
 	}
 	
+	/**
+	 * Método que genera un empleado con valores aleatorios.
+	 * @return Instancia de Empleado.
+	 */
 	public static Empleado crearEmpleado()
 	{
 		return new Empleado(crearEdad(), obtenerNombre(), crearSalario());
 	}
 	
+	/**
+	 * Método que devuelve un nombre aleatorio de la lista NOMBRES.
+	 * @return Nombre del empleado.
+	 */
 	public static String obtenerNombre()
 	{
 		return NOMBRES.get(new Random().nextInt(NOMBRES.size()));
 	}
 	
+	/**
+	 * Método que genera una salario aleatorio.
+	 * @return Salario del empleado.
+	 */
 	public static BigDecimal crearSalario()
 	{
 		return new BigDecimal(BigInteger.valueOf(new Random().nextInt(1000001)), 2);
 	}
 	
+	/**
+	 * Método que genera una edad para un empleado de forma aleatoria, con un valor entre 18 y 70.
+	 * @return Edad del empleado.
+	 */
 	public static Integer crearEdad()
 	{
 		return ThreadLocalRandom.current().nextInt(18, 70 + 1);

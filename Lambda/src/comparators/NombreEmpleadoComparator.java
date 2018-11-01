@@ -9,7 +9,6 @@ import beans.Empleado;
  */
 public class NombreEmpleadoComparator implements Comparator<Empleado>
 {
-
 	/**
 	 * Implementación del método abstracto compare, en este caso, para ordenar de acuerdo al nombre de los empleados.
 	 */
@@ -18,5 +17,4 @@ public class NombreEmpleadoComparator implements Comparator<Empleado>
 	{
 		return e1.getNombre().compareTo(e2.getNombre());
 	}
-
 }

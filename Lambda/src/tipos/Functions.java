@@ -8,10 +8,17 @@ import java.util.function.Function;
 import beans.Empleado;
 import builder.Pizza;
 
+/**
+ * Claque que contiene funciones que se utilizarán en el proyecto.
+ */
 public class Functions
 {
 	private static BigDecimal AUMENTO_ANUAL = new BigDecimal("1.2");
 	
+	/**
+	 * Ejemplo de función.
+	 * @param empleados Lista de empleados.
+	 */
 	public static void funcion(List<Empleado> empleados)
 	{
 		Function<BigDecimal, BigDecimal> funcion = salario -> salario.multiply(AUMENTO_ANUAL);
@@ -20,6 +27,10 @@ public class Functions
 				"El empleado " + empleado.getNombre() + " gana actualmente " + empleado.getSalario() + ", ahora ganará: " + funcion.apply(empleado.getSalario())));
 	}
 	
+	/**
+	 * Ejemplo de bifunción.
+	 * @param empleados Lista de empleados.
+	 */
 	public static void funcion2(List<Empleado> empleados)
 	{
 		Function<BigDecimal, String> funcion = salario -> "$" + salario;
